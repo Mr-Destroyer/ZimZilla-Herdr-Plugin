@@ -1,0 +1,24 @@
+id = "zimzilla.herdr"
+name = "ZimZilla Herdr integration"
+version = "1.0.0"
+min_herdr_version = "0.7.0"
+description = "Make Herdr recognise ZimZilla as an agent: verify the reporter, and show what Herdr currently sees."
+platforms = ["linux", "macos"]
+
+# Runs once per server start. Silent when the integration is healthy; its
+# output lands in the plugin log, which is where a broken install should be
+# diagnosable without the operator having to go looking.
+[[startup]]
+command = ["sh", "install.sh", "--quiet"]
+
+[[actions]]
+id = "status"
+title = "ZimZilla: Herdr status"
+contexts = ["workspace"]
+command = ["sh", "status.sh"]
+
+[[actions]]
+id = "install"
+title = "ZimZilla: verify Herdr integration"
+contexts = ["workspace"]
+command = ["sh", "install.sh"]
